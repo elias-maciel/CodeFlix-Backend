@@ -3,9 +3,15 @@ import uuid
 import pytest
 
 from src.core.category.application.use_cases.exceptions import CategoryNotFound
-from src.core.category.application.use_cases.get_category import GetCategory, GetCategoryRequest, GetCategoryResponse
+from src.core.category.application.use_cases.get_category import (
+    GetCategory,
+    GetCategoryRequest,
+    GetCategoryResponse,
+)
 from src.core.category.domain.category import Category
-from src.core.category.infra.in_memory_category_repository import InMemoryCategoryRepository
+from src.core.category.infra.in_memory_category_repository import (
+    InMemoryCategoryRepository,
+)
 
 
 class TestGetCategory:
@@ -18,7 +24,9 @@ class TestGetCategory:
             name="Series",
             description="Description",
         )
-        repository = InMemoryCategoryRepository(categories=[category_movies, category_series])
+        repository = InMemoryCategoryRepository(
+            categories=[category_movies, category_series]
+        )
         use_case = GetCategory(repository=repository)
         request = GetCategoryRequest(id=category_movies.id)
         response = use_case.execute(request=request)
@@ -39,7 +47,9 @@ class TestGetCategory:
             name="Series",
             description="Description",
         )
-        repository = InMemoryCategoryRepository(categories=[category_movies, category_series])
+        repository = InMemoryCategoryRepository(
+            categories=[category_movies, category_series]
+        )
         use_case = GetCategory(repository=repository)
         not_found_id = uuid.uuid4()
         request = GetCategoryRequest(id=not_found_id)
