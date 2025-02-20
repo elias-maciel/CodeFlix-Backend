@@ -32,3 +32,6 @@ class InMemoryCategoryRepository(CategoryRepository):
             self.save(category)
         else:
             raise CategoryNotFound("Category not found")
+
+    def list(self) -> list[Category]:
+        return [category for category in self.categories]

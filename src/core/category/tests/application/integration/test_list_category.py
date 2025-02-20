@@ -10,13 +10,13 @@ from src.core.category.application.use_cases.list_category import (
     ListCategoryResponse,
 )
 from src.core.category.domain.category import Category
+from src.core.category.infra.in_memory_category_repository import InMemoryCategoryRepository
 
 
 class TestListCategory:
     def test_when_no_categories_in_repository_then_return_empty_list(self):
-        mock_repository = create_autospec(spec=CategoryRepository)
-        mock_repository.list.return_value = []
-        use_case = ListCategory(repository=mock_repository)
+        repository = InMemoryCategoryRepository(categories=[])
+        use_case = ListCategory(repository=repository)
         request = ListCategoryRequest()
 
         response = use_case.execute(request=request)
@@ -34,9 +34,8 @@ class TestListCategory:
             description="Description",
             is_active=True,
         )
-        mock_repository = create_autospec(spec=CategoryRepository)
-        mock_repository.list.return_value = [category_movie, category_series]
-        use_case = ListCategory(repository=mock_repository)
+        repository = InMemoryCategoryRepository(categories=[category_movie, category_series])
+        use_case = ListCategory(repository=repository)
         request = ListCategoryRequest()
 
         response = use_case.execute(request=request)
