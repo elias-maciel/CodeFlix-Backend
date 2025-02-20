@@ -20,4 +20,6 @@ class InMemoryCategoryRepository(CategoryRepository):
         return None
 
     def delete(self, id: UUID):
-        self.categories = [category for category in self.categories if category.id != id]
+        self.categories = [
+            category for category in self.categories if category.id != id
+        ]

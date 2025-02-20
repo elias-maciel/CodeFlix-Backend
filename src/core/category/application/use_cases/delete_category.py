@@ -8,6 +8,7 @@ from src.core.category.application.use_cases.exceptions import CategoryNotFound
 class DeleteCategoryRequest:
     id: UUID
 
+
 class DeleteCategory:
     def __init__(self, repository):
         self.repository = repository
