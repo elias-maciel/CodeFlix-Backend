@@ -14,7 +14,7 @@ class InMemoryCategoryRepository(CategoryRepository):
     def save(self, category: Category):
         self.categories.append(category)
 
-    def get_by_id(self, id: UUID) ->  Optional[Category]:
+    def get_by_id(self, id: UUID) ->  Category | None:
         for category in self.categories:
             if category.id == id:
                 return category
