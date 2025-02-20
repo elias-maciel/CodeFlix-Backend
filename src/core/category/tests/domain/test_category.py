@@ -3,7 +3,7 @@ from uuid import UUID
 
 import pytest
 
-from code_flix.category import Category
+from src.core.category.domain.category import Category
 
 
 class TestCategory:
