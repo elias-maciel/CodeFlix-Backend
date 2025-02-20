@@ -96,3 +96,13 @@ class TestEquality:
         category2 = Category(name="Movie", description="Description", is_active=True, id=common_id)
         assert category1 == category2
 
+    def test_equality_different_classes(self):
+        class Dummy:
+            pass
+
+        common_id = uuid.uuid4()
+        category = Category(name="Movie", description="Description", is_active=True, id=common_id)
+        dummy = Dummy()
+        dummy.id = common_id
+        assert category != dummy
+

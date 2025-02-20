@@ -21,6 +21,8 @@ class Category:
         return f"<Category {self.name} ({self.id})>"
 
     def __eq__(self, other):
+        if not isinstance(other, Category):
+            return False
         return self.id == other.id
 
     def validate(self):
