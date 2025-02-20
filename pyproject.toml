@@ -27,11 +27,9 @@ build-backend = "poetry.core.masonry.api"
 profile = "black"
 line_length = 79
 
-[tool.autoflake]
-remove_all_unused_imports = true
-remove_unused_variables = true
-expand_star_imports = true
-
 [tool.taskipy.tasks]
 test = "pytest"
-lint = "isort . & black . & autoflake --in-place ."
+isort = "isort ."
+black = "black ."
+autoflake = "autoflake --in-place . --remove-all-unused-imports --remove-unused-variables --expand-star-imports"
+lint = "task isort & task black & task autoflake"
