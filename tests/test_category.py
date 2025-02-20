@@ -12,7 +12,7 @@ class TestCategory():
             Category()
 
     def test_name_must_have_less_than_255_characters(self):
-        with pytest.raises(ValueError, match="The name must have less than 255 characters"):
+        with pytest.raises(ValueError, match="The name must have less than 256 characters"):
             Category(name="a" * 256)
 
     def test_category_must_be_created_with_id_as_uuid(self):
@@ -45,3 +45,15 @@ class TestCategory():
         id = uuid.uuid4()
         category = Category(name="Movie", description="Description", is_active=False, id=id)
         assert repr(category) == f"<Category Movie ({id})>"
+
+class TestUpdateCategory():
+    def test_update_category_with_name_and_description(self):
+        category = Category(name="Movie", description="Description", is_active=False)
+        category.update_category(name="New Movie", description="New Description")
+        assert category.name == "New Movie"
+        assert category.description == "New Description"
+
+    def test_update_category_with_invalid_name(self):
+        category = Category(name="Movie", description="Description", is_active=False)
+        with pytest.raises(ValueError, match="The name must have less than 256 characters"):
+            category.update_category(name="a" * 256, description="New Description")
