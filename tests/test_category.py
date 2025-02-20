@@ -46,14 +46,45 @@ class TestCategory():
         category = Category(name="Movie", description="Description", is_active=False, id=id)
         assert repr(category) == f"<Category Movie ({id})>"
 
+    def  test_cannot_create_category_with_empty_name(self):
+        with pytest.raises(ValueError, match="The name cannot be empty"):
+            Category(name="")
+
 class TestUpdateCategory():
     def test_update_category_with_name_and_description(self):
         category = Category(name="Movie", description="Description", is_active=False)
-        category.update_category(name="New Movie", description="New Description")
+        category.update(name="New Movie", description="New Description")
         assert category.name == "New Movie"
         assert category.description == "New Description"
 
     def test_update_category_with_invalid_name(self):
         category = Category(name="Movie", description="Description", is_active=False)
         with pytest.raises(ValueError, match="The name must have less than 256 characters"):
-            category.update_category(name="a" * 256, description="New Description")
+            category.update(name="a" * 256, description="New Description")
+
+    def test_update_category_with_empty_name(self):
+        category = Category(name="Movie", description="Description", is_active=False)
+        with pytest.raises(ValueError, match="The name cannot be empty"):
+            category.update(name="", description="New Description")
+
+class TestActivateCategory():
+    def test_activate_category(self):
+        category = Category(name="Movie", description="Description", is_active=False)
+        category.activate()
+        assert category.is_active
+
+    def test_activate_category_is_active(self):
+        category = Category(name="Movie", description="Description", is_active=True)
+        category.activate()
+        assert category.is_active
+
+class TestDeactivateCategory():
+    def test_deactivate_category(self):
+        category = Category(name="Movie", description="Description", is_active=True)
+        category.deactivate()
+        assert not category.is_active
+
+    def test_deactivate_category_is_inactive(self):
+        category = Category(name="Movie", description="Description", is_active=False)
+        category.deactivate()
+        assert not category.is_active
