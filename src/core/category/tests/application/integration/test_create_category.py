@@ -15,10 +15,10 @@ class TestCreateCategory:
         )
         category_id = use_case.execute(request=create_category_request).id
 
+        saved_category = repository.categories[0]
         assert category_id is not None
         assert isinstance(category_id, UUID)
         assert len(repository.categories) == 1
-        saved_category = repository.categories[0]
         assert saved_category.name == "Movie"
         assert saved_category.description == "Description"
         assert saved_category.id == category_id
