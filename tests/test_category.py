@@ -6,7 +6,7 @@ import pytest
 from code_flix.category import Category
 
 
-class TestCategory():
+class TestCategory:
     def test_name_is_required(self):
         with pytest.raises(TypeError, match="missing 1 required positional argument: 'name'"):
             Category()
@@ -50,7 +50,7 @@ class TestCategory():
         with pytest.raises(ValueError, match="The name cannot be empty"):
             Category(name="")
 
-class TestUpdateCategory():
+class TestUpdateCategory:
     def test_update_category_with_name_and_description(self):
         category = Category(name="Movie", description="Description", is_active=False)
         category.update(name="New Movie", description="New Description")
@@ -67,7 +67,7 @@ class TestUpdateCategory():
         with pytest.raises(ValueError, match="The name cannot be empty"):
             category.update(name="", description="New Description")
 
-class TestActivateCategory():
+class TestActivateCategory:
     def test_activate_category(self):
         category = Category(name="Movie", description="Description", is_active=False)
         category.activate()
@@ -78,7 +78,7 @@ class TestActivateCategory():
         category.activate()
         assert category.is_active
 
-class TestDeactivateCategory():
+class TestDeactivateCategory:
     def test_deactivate_category(self):
         category = Category(name="Movie", description="Description", is_active=True)
         category.deactivate()
@@ -88,3 +88,11 @@ class TestDeactivateCategory():
         category = Category(name="Movie", description="Description", is_active=False)
         category.deactivate()
         assert not category.is_active
+
+class TestEquality:
+    def test_when_categories_have_same_id_they_are_equal(self):
+        common_id = uuid.uuid4()
+        category1 = Category(name="Movie", description="Description", is_active=True, id=common_id)
+        category2 = Category(name="Movie", description="Description", is_active=True, id=common_id)
+        assert category1 == category2
+
