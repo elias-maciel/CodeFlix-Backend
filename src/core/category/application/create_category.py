@@ -1,13 +1,10 @@
 from uuid import UUID
 
+from src.core.category.application.exceptions import InvalidCategoryData
 from src.core.category.domain.category import Category
 from src.core.category.infra.in_memory_category_repository import (
     InMemoryCategoryRepository,
 )
-
-
-class InvalidCategoryData(Exception):
-    pass
 
 
 def create_category(

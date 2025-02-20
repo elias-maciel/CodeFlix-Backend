@@ -4,9 +4,9 @@ from uuid import UUID
 import pytest
 
 from src.core.category.application.create_category import (
-    InvalidCategoryData,
     create_category,
 )
+from src.core.category.application.exceptions import InvalidCategoryData
 from src.core.category.infra.in_memory_category_repository import (
     InMemoryCategoryRepository,
 )
