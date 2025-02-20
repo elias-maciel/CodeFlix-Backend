@@ -8,11 +8,15 @@ from code_flix.category import Category
 
 class TestCategory:
     def test_name_is_required(self):
-        with pytest.raises(TypeError, match="missing 1 required positional argument: 'name'"):
+        with pytest.raises(
+            TypeError, match="missing 1 required positional argument: 'name'"
+        ):
             Category()
 
     def test_name_must_have_less_than_255_characters(self):
-        with pytest.raises(ValueError, match="The name must have less than 256 characters"):
+        with pytest.raises(
+            ValueError, match="The name must have less than 256 characters"
+        ):
             Category(name="a" * 256)
 
     def test_category_must_be_created_with_id_as_uuid(self):
@@ -29,13 +33,11 @@ class TestCategory:
         category = Category(name="Movie")
         assert category.is_active
 
-
     def test_category_is_created_with_provided_values(self):
         category = Category(name="Movie", description="Description", is_active=False)
         assert category.name == "Movie"
         assert category.description == "Description"
         assert not category.is_active
-
 
     def test_category_as_string(self):
         category = Category(name="Movie", description="Description", is_active=False)
@@ -43,12 +45,15 @@ class TestCategory:
 
     def test_category_as_repr(self):
         id = uuid.uuid4()
-        category = Category(name="Movie", description="Description", is_active=False, id=id)
+        category = Category(
+            name="Movie", description="Description", is_active=False, id=id
+        )
         assert repr(category) == f"<Category Movie ({id})>"
 
-    def  test_cannot_create_category_with_empty_name(self):
+    def test_cannot_create_category_with_empty_name(self):
         with pytest.raises(ValueError, match="The name cannot be empty"):
             Category(name="")
+
 
 class TestUpdateCategory:
     def test_update_category_with_name_and_description(self):
@@ -59,13 +64,16 @@ class TestUpdateCategory:
 
     def test_update_category_with_invalid_name(self):
         category = Category(name="Movie", description="Description", is_active=False)
-        with pytest.raises(ValueError, match="The name must have less than 256 characters"):
+        with pytest.raises(
+            ValueError, match="The name must have less than 256 characters"
+        ):
             category.update(name="a" * 256, description="New Description")
 
     def test_update_category_with_empty_name(self):
         category = Category(name="Movie", description="Description", is_active=False)
         with pytest.raises(ValueError, match="The name cannot be empty"):
             category.update(name="", description="New Description")
+
 
 class TestActivateCategory:
     def test_activate_category(self):
@@ -78,6 +86,7 @@ class TestActivateCategory:
         category.activate()
         assert category.is_active
 
+
 class TestDeactivateCategory:
     def test_deactivate_category(self):
         category = Category(name="Movie", description="Description", is_active=True)
@@ -89,11 +98,16 @@ class TestDeactivateCategory:
         category.deactivate()
         assert not category.is_active
 
+
 class TestEquality:
     def test_when_categories_have_same_id_they_are_equal(self):
         common_id = uuid.uuid4()
-        category1 = Category(name="Movie", description="Description", is_active=True, id=common_id)
-        category2 = Category(name="Movie", description="Description", is_active=True, id=common_id)
+        category1 = Category(
+            name="Movie", description="Description", is_active=True, id=common_id
+        )
+        category2 = Category(
+            name="Movie", description="Description", is_active=True, id=common_id
+        )
         assert category1 == category2
 
     def test_equality_different_classes(self):
@@ -101,8 +115,9 @@ class TestEquality:
             pass
 
         common_id = uuid.uuid4()
-        category = Category(name="Movie", description="Description", is_active=True, id=common_id)
+        category = Category(
+            name="Movie", description="Description", is_active=True, id=common_id
+        )
         dummy = Dummy()
         dummy.id = common_id
         assert category != dummy
-

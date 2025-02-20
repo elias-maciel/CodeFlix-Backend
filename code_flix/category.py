@@ -29,8 +29,7 @@ class Category:
         if len(self.name) > 255:
             raise ValueError("The name must have less than 256 characters")
 
-
-    def update(self, name: str, description: str= ""):
+    def update(self, name: str, description: str = ""):
         self.name = name
         self.description = description
 
@@ -41,4 +40,3 @@ class Category:
 
     def deactivate(self):
         self.is_active = False
-
