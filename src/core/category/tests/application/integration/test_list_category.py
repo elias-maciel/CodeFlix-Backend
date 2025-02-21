@@ -10,7 +10,9 @@ from src.core.category.application.use_cases.list_category import (
     ListCategoryResponse,
 )
 from src.core.category.domain.category import Category
-from src.core.category.infra.in_memory_category_repository import InMemoryCategoryRepository
+from src.core.category.infra.in_memory_category_repository import (
+    InMemoryCategoryRepository,
+)
 
 
 class TestListCategory:
@@ -34,7 +36,9 @@ class TestListCategory:
             description="Description",
             is_active=True,
         )
-        repository = InMemoryCategoryRepository(categories=[category_movie, category_series])
+        repository = InMemoryCategoryRepository(
+            categories=[category_movie, category_series]
+        )
         use_case = ListCategory(repository=repository)
         request = ListCategoryRequest()
 
