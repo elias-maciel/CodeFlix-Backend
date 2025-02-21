@@ -18,7 +18,7 @@ class CategoryViewSet(viewsets.ViewSet):
                     "is_active": True,
                 },
                 {
-                    "id": "c71d6b9f-a549-4e43-b8cd-da6d430a47db",
+                    "id": "7dd821d6-094b-4144-a7bf-e42413fcc517",
                     "name": "Documentary",
                     "description": "Documentary description",
                     "is_active": True,
