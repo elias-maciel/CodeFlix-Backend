@@ -2,12 +2,12 @@ from uuid import UUID
 
 from core.category.domain.category import Category
 from core.category.domain.category_repository import CategoryRepository
-from django_project.category_app.models import Category as CategoryModel
+from django_project.category_app.models import Category as CategoryORM
 
 
 class DjangoORMCategoryRepository(CategoryRepository):
-    def __init__(self, category_model: CategoryModel = CategoryModel):
-        self.category_model = category_model
+    def __init__(self, model: CategoryORM | None = None) -> None:
+        self.category_model = model or CategoryORM
 
     def save(self, category: Category) -> None:
         self.category_model.objects.create(
