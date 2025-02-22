@@ -6,6 +6,7 @@ authors = ["elias-maciel <eliasfsilvamaciel@gmail.com>"]
 readme = "README.md"
 packages = [
     { include = "src", from = "." },
+    {include="django_project", from="src"},
 ]
 
 [tool.poetry.dependencies]
