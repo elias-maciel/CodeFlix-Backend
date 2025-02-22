@@ -1,6 +1,6 @@
-from django.test import TestCase
 from rest_framework.status import HTTP_200_OK
 from rest_framework.test import APITestCase
+
 
 # Create your tests here.
 class TestCategoryAPI(APITestCase):
